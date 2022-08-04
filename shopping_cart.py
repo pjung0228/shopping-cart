@@ -25,7 +25,6 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-
 def to_usd(my_price):
     """
     Converts a numeric value to usd-formatted string, for printing and display purposes.
@@ -41,24 +40,49 @@ def to_usd(my_price):
 
 # TODO: write some Python code here to produce the desired output
 
-print(products)
+selected_products = []
+subtotal = 0
+total_price = 0
+selected_ids = []
+
+import datetime
+from gettext import install;
+ET = datetime.datetime.now()
 
 
-#
-# INFO DISPLAY / OUTPUT
+while True:
+    selected_id = input("Please input a product identifier: ")
+    if selected_id.lower() == "done":
+        break
+    #elif
+    else:
+        matching_products = [p for p in products if str(p["id"]) == str(selected_id)]  
+        matching_product = matching_products[0]
+        selected_products.append(matching_product)
+        subtotal = subtotal + matching_product["price"]
 
-selected_id = input("Please input a product identifier: ")
-print(selected_id)
-print(type(selected_id))
+tax_rate = input("Please input tax rate: ")
+print("----")
+print("Thanks for shopping with us! ")
+print("385 River Oaks Pkwy")
+print("919-556-3945")
+print("----")
+print(ET)
+print("----")
+print("   ")
 
-
-
-
-
-
-
-
-
+for p in selected_products: 
+    print(p["name"], to_usd(p["price"]))
+print("----")
+print("   ")
+print("Subtotal:", to_usd(subtotal))
+tax = float(subtotal) * float(tax_rate)
+print("tax:", to_usd(tax))
+total = tax + subtotal
+print("total:", to_usd(total))
+print("----")
+print("   ")
+print("Thank you, we will see you again!")
 
 
 
